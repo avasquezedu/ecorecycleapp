@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_form_campaign"
+    android:background="@color/white"
+    tools:context=".ui.campaign.FormCampaignFragment">
+
+
+    <TextView
+        android:id="@+id/lblTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="196dp"
+        android:text="Campaign Registration"
+        android:textColor="@color/recycler_primary"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtName"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="Enter a name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle" />
+
+    <EditText
+        android:id="@+id/txtStartDate"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="Enter a start date"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+    <EditText
+        android:id="@+id/txtEndDate"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="Enter a end date"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtStartDate" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEndDate">
+
+        <RadioButton
+            android:id="@+id/rbdCampaignType1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Marketing" />
+
+        <RadioButton
+            android:id="@+id/rbdCampaignType2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Venta" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/txtDescription"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="Enter a description"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+    <Button
+        android:id="@+id/btnRegisterCampaign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Register Campaign"
+        android:backgroundTint="@color/recycler_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <Button
+        android:id="@+id/btnBackToCampaign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="back"
+        android:textColor="@color/recycler_primary"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegisterCampaign" />
+</androidx.constraintlayout.widget.ConstraintLayout>
