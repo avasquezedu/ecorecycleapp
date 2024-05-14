@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -41,9 +42,8 @@ class FormCampaignFragment : Fragment() {
     private lateinit var txtStartDate: EditText
     private lateinit var txtEndDate: EditText
     private lateinit var txtType: RadioButton
-    private lateinit var txtStatus: EditText
     private lateinit var btnRegister: Button
-    private lateinit var btnBack: Button
+    private lateinit var btnBack: ImageButton
     private  lateinit var lblTitle: TextView
     private var edition = false;
     private var id: Int = 0
@@ -63,12 +63,17 @@ class FormCampaignFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_form_campaign, container, false)
-        val btnBackToCampaign = view.findViewById<Button>(R.id.btnBackToCampaign)
+        val btnBackToCampaign = view.findViewById<ImageButton>(R.id.btnBackToCampaign)
         btnBackToCampaign.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_form_campaign, CampaignFragment())
+                .addToBackStack(null)
+                .commit()
+            btnRegister.visibility = View.INVISIBLE
         }
         campaignRepository = CampaignRepository(requireContext())
         initReferences(view)
+        setDataEditCampaign(view)
         return view
     }
 
@@ -85,25 +90,33 @@ class FormCampaignFragment : Fragment() {
         lblTitle = view.findViewById(R.id.lblTitle)
 
         btnRegister.setOnClickListener {
-            if(edition) {
-                setDataEditCampaign()
+            val selectedRadioButtonId1: Int = radioGroup.checkedRadioButtonId
+            txtType = view.findViewById(selectedRadioButtonId1)
+            if(edition)
                 editCampaign()
-            }
             if (!edition)
                 addCampaign()
         }
     }
 
-    fun setDataEditCampaign() {
-        edition = true
-        id = arguments?.getString("id").toString().toInt()
-        lblTitle.text = "Edit Campaign: " + id
-        btnRegister.text = "Save Changes"
-        txtName.setText(arguments?.getString("name"))
-        txtDescription.setText(arguments?.getString("description"))
-        txtStartDate.setText(arguments?.getString("startDate"))
-        txtEndDate.setText(arguments?.getString("endDate"))
-        //txtType = view.findViewById(selectedRadioButtonId)
+    fun setDataEditCampaign(view: View) {
+        if (arguments != null) {
+            edition = true
+            id = arguments?.getString("id").toString().toInt()
+            lblTitle.text = "Editar Datos de Campaña"
+            btnRegister.text = "Guardar Cambios"
+            txtName.setText(arguments?.getString("name"))
+            txtDescription.setText(arguments?.getString("description"))
+            txtStartDate.setText(arguments?.getString("startDate"))
+            txtEndDate.setText(arguments?.getString("endDate"))
+            if ("Marketing" == arguments?.getString("type")) {
+                txtType = view.findViewById(R.id.rbdCampaignType1)
+                view.findViewById<RadioGroup>(R.id.radioGroup).check(txtType.id)
+            } else {
+                txtType = view.findViewById(R.id.rbdCampaignType2)
+                view.findViewById<RadioGroup>(R.id.radioGroup).check(txtType.id)
+            }
+        }
     }
 
     private fun prepareRequest(): Campaign {
@@ -112,7 +125,6 @@ class FormCampaignFragment : Fragment() {
         campaign.description = txtDescription.text.toString()
         campaign.startDate = txtStartDate.text.toString()
         campaign.endDate = txtEndDate.text.toString()
-        //campaign.type = txtType.text.toString()
         campaign.type = txtType.text.toString()
         campaign.status = "EN PROCESO"
         return campaign

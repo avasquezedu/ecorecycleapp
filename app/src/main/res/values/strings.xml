@@ -15,4 +15,14 @@
     <string name="sign_out">Cerrar Sesión</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Iniciar Sesión</string>
+    <string name="welcome">"Bienvenido! "</string>
+    <string name="invalid_username">Usuario inválido</string>
+    <string name="invalid_password">Mínimo 6 caracteres</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_login">LoginActivity</string>
 </resources>

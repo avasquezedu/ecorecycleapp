@@ -12,6 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.eco_recycle_app.databinding.ActivityMainBinding
+import com.example.eco_recycle_app.ui.campaign.FormCampaignFragment
+import com.example.eco_recycle_app.ui.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +33,11 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
         }*/
+        val fragment = LoginFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_container, fragment)
+            .commit()
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)

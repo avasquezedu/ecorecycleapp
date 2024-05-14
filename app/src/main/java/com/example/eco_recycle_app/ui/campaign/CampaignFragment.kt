@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eco_recycle_app.R
 import com.example.eco_recycle_app.adapter.CampaignAdapter
+import com.example.eco_recycle_app.entity.Campaign
 import com.example.eco_recycle_app.repository.CampaignRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -60,8 +61,6 @@ class CampaignFragment : Fragment(), CampaignAdapter.MyAdapterListener {
         }
         initReferences(view)
         loadData()
-
-
         return view
     }
 
@@ -77,10 +76,11 @@ class CampaignFragment : Fragment(), CampaignAdapter.MyAdapterListener {
         adapter.onClickEditItem {
             val bundle = Bundle()
             bundle.putString("id", it.id.toString())
-            bundle.putString("name", it.name.toString())
-            bundle.putString("description", it.description.toString())
-            bundle.putString("startDate", it.startDate.toString())
-            bundle.putString("endDate", it.endDate.toString())
+            bundle.putString("name", it.name)
+            bundle.putString("description", it.description)
+            bundle.putString("startDate", it.startDate)
+            bundle.putString("endDate", it.endDate)
+            bundle.putString("type", it.type)
             val formFragment = FormCampaignFragment()
             formFragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction()
@@ -136,19 +136,25 @@ class CampaignFragment : Fragment(), CampaignAdapter.MyAdapterListener {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CampaignFragment().apply {
+        fun newInstance(campaign: Campaign) =
+            CampaignDetail().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString("id", campaign.id.toString())
+                    putString("name", campaign.name)
+                    putString("description", campaign.description)
+                    putString("startDate", campaign.startDate)
+                    putString("endDate", campaign.endDate)
+                    putString("type", campaign.type)
+                    putString("status", campaign.status)
                 }
             }
     }
 
-    override fun onItemClicked() {
-        /*requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_campaign, FormCampaignFragment())
+    override fun onItemClicked(campaign: Campaign) {
+        val campaignDetail = newInstance(campaign)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_campaign, campaignDetail)
             .addToBackStack(null)
-            .commit()*/
+            .commit()
     }
 }

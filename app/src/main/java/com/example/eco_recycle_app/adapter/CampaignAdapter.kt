@@ -40,7 +40,7 @@ class CampaignAdapter(private val listener: MyAdapterListener): RecyclerView.Ada
     }
 
     interface MyAdapterListener {
-        fun onItemClicked()
+        fun onItemClicked(campaign: Campaign)
     }
 
     inner class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -51,15 +51,18 @@ class CampaignAdapter(private val listener: MyAdapterListener): RecyclerView.Ada
         var btnEdit = view.findViewById<ImageButton>(R.id.btnItemEdit)
         var btnDelete = view.findViewById<ImageButton>(R.id.btnItemDelete)
 
+        private lateinit var currentData: Campaign
+
         fun bindView(campaign: Campaign) {
             name.text = campaign.name
             type.text = campaign.type
             status.text = campaign.status
+            currentData = campaign
         }
-        /*init {
+        init {
             view.setOnClickListener {
-                listener.onItemClicked()
-            }}*/
+                listener.onItemClicked(currentData)
+            }}
     }
 
     override fun onCreateViewHolder(
@@ -77,7 +80,6 @@ class CampaignAdapter(private val listener: MyAdapterListener): RecyclerView.Ada
             //CampaignRepository(context).deleteCampaign(campaigns[position].id)
             onClickEditItem?.invoke(campaignItem)
         }
-
         //delete
         holder.btnDelete.setOnClickListener {
             //CampaignRepository(context).deleteCampaign(campaigns[position].id)
